@@ -1,4 +1,9 @@
-# The reporting tool depends on the following tools that must be created in the databse
+# To use this tool:
+Download the python file query.py into the same folder as your database(the same folder as newsdata.sql). I assume you already have acsess to this database and are familiar with this udacity.com project. Run the python file from the command line `python3 query.py`
+
+
+
+# The reporting tool depends on the following views that must be created in the databse
 
 # Create the following views for the first problem
 
