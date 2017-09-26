@@ -1,13 +1,13 @@
-###Views created for the first problem
+# Create the following views for the first problem
 
-##Create view top_articles
-CREATE VIEW top_articles AS
+## Create top_articles view
+`CREATE VIEW top_articles AS
 	SELECT articles.title, count(*) as num
 	FROM articles, log
 	WHERE log.path = concat('/article/',articles.slug)
 	AND log.status = '200 OK'
 	GROUP BY articles.title
-	ORDER BY num DESC;
+	ORDER BY num DESC;`
 
 ###Views created for the second problem
 
@@ -49,3 +49,8 @@ CREATE VIEW day_not_200_total_requests AS
 CREATE VIEW decimal_results AS
 	SELECT day_not_200_total_requests.day,(cast(day_not_200_total_requests.not_200_ok_count as decimal) / day_not_200_total_requests.total_requests) AS percent_not_200
 	FROM day_not_200_total_requests;
+
+SQL CODE THAT WILL TURN IT INTO PERCENTS
+CREATE VIEW decimal_results_truncated AS
+	SELECT day, trunc(percent_not_200*100, 2) AS percent_not_200
+	FROM decimal_results;
