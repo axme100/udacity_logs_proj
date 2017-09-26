@@ -1,6 +1,8 @@
-# Create the following views for the first problem 
+# The reporting tool depends on the following tools that must be created in the databse
 
-### Create top_articles view
+# Create the following views for the first problem
+
+### SQL CODE: get a list of the articles sorted by the number of views (views in problem 2 also depend on top_articles)
 `CREATE VIEW top_articles AS
 	SELECT articles.title, count(*) as num
 	FROM articles, log
@@ -9,7 +11,7 @@
 	GROUP BY articles.title
 	ORDER BY num DESC;`
 
-# Create the following views for the second problem
+# Create the following views for the second problem:
 
 ### Create view tite_author
 `CREATE VIEW title_author AS
@@ -24,7 +26,7 @@
 	FROM top_articles, title_author
 	WHERE title_author.title = top_articles.title;`
 
-# Create views for the third problem
+# Create the following views for the third problem:
 
 ### SQL CODE: to get a table with two columns, day and number_of_time_not_200ok
 `CREATE VIEW day_not_200 AS
@@ -50,7 +52,7 @@
 	SELECT day_not_200_total_requests.day,(cast(day_not_200_total_requests.not_200_ok_count as decimal) / day_not_200_total_requests.total_requests) AS percent_not_200
 	FROM day_not_200_total_requests;`
 
-### SQL CODE THAT WILL TURN IT INTO PERCENTS
+### SQL CODE: turn those results into percents
 `CREATE VIEW decimal_results_truncated AS
 	SELECT day, trunc(percent_not_200*100, 2) AS percent_not_200
 	FROM decimal_results;`
