@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Import psycopg2, used to interact with PostgreSQL databases
 import psycopg2
 
@@ -22,10 +24,13 @@ def most_popular_articles():
     # Close the database
     db.close()
 
-    print("The three most popular artilces are: ")
-    print(results[0])
-    print(results[1])
-    print(results[2])
+    print("")
+    print("The top 3 most popular articles: ")
+    print("")
+    print("1) Title: " + results[0][0] + "--Views: " + str(results[0][1]))
+    print("2) Title: " + results[1][0] + "--Views: " + str(results[1][1]))
+    print("3) Title: " + results[2][0] + "--Views: " + str(results[2][1]))
+    print("")
 
 
 def most_popular_article_authors():
@@ -48,11 +53,18 @@ def most_popular_article_authors():
     # Close the database
     db.close()
 
-    print("The most popular article authors are: ")
-    print(results[0])
-    print(results[1])
-    print(results[2])
-    print(results[3])
+    print("")
+    print("The Top Authors:")
+    print("")
+    print("1) Author: " + results[0][0] +
+          "--Total Views: " + str(results[0][1]))
+    print("2) Author: " + results[1][0] +
+          "--Total Views: " + str(results[1][1]))
+    print("3) Author: " + results[2][0] +
+          "--Total Views: " + str(results[2][1]))
+    print("4) Author: " + results[3][0] +
+          "--Total Views: " + str(results[3][1]))
+    print("")
 
 
 def more_than_one_percent():
@@ -78,18 +90,14 @@ def more_than_one_percent():
     # Return the results, note that fetchall()
     # returns a list with a tuple inside of it
     # thus the complicated indexing
+
+    print("")
+    print("Days in which more than 1% of requests failed: ")
+    print("")
     print("On " + str(results[0][0].date()) +
           " " + str(results[0][1]) + "% of requesets led to errors")
+    print("")
 
-
-print("Question 1")
-print("")
 most_popular_articles()
-print("")
-print("Question 2")
-print("")
 most_popular_article_authors()
-print("")
-print("Question 3")
-print("")
 more_than_one_percent()
