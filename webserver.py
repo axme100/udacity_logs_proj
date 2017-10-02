@@ -10,13 +10,12 @@ class WebserverHandler(BaseHTTPRequestHandler):
 				self.send_response(200)
 				self.send_header('Content-type', 'text/html')
 				self.end_headers()
-
 				output = ""
 				output = "<html><body>"
-				output += "&#161 Hola"
-				output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>Qué quieres que diga, wey?</h2><input name ="message" type="text" ><input type="submit" value="Submit"> </form>'''
+				output += "Hello:"
+				output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
 				output += "</html></body>"
-				self.wfile.write(output.encode(encoding = "utf_8"))
+				self.wfile.writels
 				print(output)
 				return
 			if self.path.endswith("/hola"):
@@ -26,7 +25,7 @@ class WebserverHandler(BaseHTTPRequestHandler):
 				output = ""
 				output += "<html><body>"
 				output += "&#161 Hola"
-				output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>Qué quieres que diga, wey?</h2><input name ="message" type="text" ><input type="submit" value="Submit"> </form>'''
+				output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
 				output += "</html></body>"
 				self.wfile.write(output.encode(encoding = "utf_8"))
 				print(output)
@@ -41,21 +40,22 @@ class WebserverHandler(BaseHTTPRequestHandler):
 			self.end_headers()
 			# Parses HTML form header, like content type into a main value and dictionary value parameter
 			# Decipher the message sent from the server (the client)
-			ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+			ctype, pdict = cgi.parse_header(self.headers.getheader('Content-type'))
 			# Is it form data
+			print("hello123")
 			if ctype == 'multipart/form-data':
 				# Collect all fields in the form
 				fields = cgi.parse_multipart(self.rfile, pdict)
 				# Store the values (or some into an array)
 				messagecontent = fields.get('message')
-		output = ""
-		output ="<html><body>"
-		output += "<h2> Okay, how about this: </h2>"
-		output += "<h1> %s </h1>" % messagecontent[0]
-		output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>Qué quieres que diga, wey?</h2><input name ="message" type="text" ><input type="submit" value="Submit"> </form>'''
-		output += "</html></body>"
-		self.wfile.write(output.encode(encoding = "utf_8"))
-		print(output)
+			output = ""
+			output = "<html><body>"
+			output += "<h2> Okay, how about this: </h2>"
+			output += "<h1> %s </h1>" % messagecontent[0]
+			output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
+			output += "</html></body>"
+			self.wfile.write(output.encode(encoding = "utf_8"))
+			print(output)
 		
 		except:
 			pass
