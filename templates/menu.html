@@ -1,61 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<title>CSS Template</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+  <body>
+    <h2> This is the menu page for restaurant number {{restaurant_id}}. </h2>
+      <a href="{{ url_for('newMenuItem', restaurant_id = restaurant_id) }}"> <h3> Add Menu Item </h3> </a>
+      {% for item in items %}
+      <h2> {{item.name}} </h2>
+      <a href="{{url_for('editMenuItem', restaurant_id = restaurant_id, menu_id = item.id)}}"> Edit </a>
+      <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant_id, menu_id = item.id)}}"> Delete </a>
+      <h2> {{item.description}} </h2>
+      <h2> {{item.price}} </h2>
+      {% endfor %}
+  </body>
 </head>
-
-<body>
-
-<div class="header">
-  <h2>{{restaurant.name}}</h2>
-  <h3>Mange Menu Items</h3>
-  <p>To use this app please click on the links below</p>
-  <!--MESSAGE FLASHING EXAMPLE -->
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-
-<ul>
-{% for message in messages %}
-  <li><strong>{{message}}</strong></li>
-  {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
-<a href = '{{url_for('newMenuItem', restaurant_id = restaurant.id)}}'>
-Create New Item</a>
-</div>
-
-{% for i in items %}
-
-
-<div class="row">
-  <div class="column" style="background-color:#aaa;">
-  	<h1> Item Name </h1>
-	{{i.name}}
-  </div>
-	<div class="column" style="background-color:#bbb;">
-		<h1> Description and Price </h1>
-  		{{i.description}} ({{i.price}})
-	</div>
-  <div class="column" style="background-color:#ccc;">
-  	<h1> Actions </h1>
-  	<a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}"> Edit </a>
-	<a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}"> Delete </a>
-  </div>
-</div>
-
-
-{% endfor %}
-
-
-<div class="footer">
-  <p>Footer</p>
-</div>
-
-
-</body>
-
 </html>

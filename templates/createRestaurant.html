@@ -1,0 +1,15 @@
+<html>
+
+<body>
+<h1> What is the name of the restaurant that you want to create? </h1>
+
+<form action="{{ url_for('createRestaurant') }}" method = 'post'>
+
+<input type='text', size='30', name = 'name'>
+<input type='submit' value='Create'>
+
+<a href = '#'> Cancel </a>
+
+</form>
+</body>
+</html>
